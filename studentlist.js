@@ -5,9 +5,10 @@ window.addEventListener("DOMContentLoaded", init);
 let studentBlockGrid = document.querySelector('#student-block-grid');
 let studentBlock = document.querySelector('#student-block-template').content;
 
+
 function init() {
   getJSON();
-  console.log(arrayOfStudents)
+  // console.log(arrayOfStudents)
 
   // TODO: Load JSON, create clones, build list, add event listeners, show modal, find images, and other stuff ...
 }
@@ -29,6 +30,7 @@ function init() {
   }
 
   const arrayOfStudents = [];
+  let currentArray = [];
 
   function createStudents(data){
     data.forEach(stud => {
@@ -74,18 +76,16 @@ function init() {
   }
 
     // We need to create a function that returns an array of only specific students.
-
   function filterHouse(house){
     let houseFiltered = [];
 
     houseFiltered = arrayOfStudents.filter(ele => ele.house === house);
-    
     return houseFiltered;
 
   }
 
   //Testing -- WORKS!
-  filterHouse("Slytherin");
+  //filterHouse("Slytherin");
   //Now making buttons work to filter by house
 
   function displayAll(){
@@ -103,6 +103,7 @@ function init() {
   }
   function filterRavenclaw (){
     displayStudents(filterHouse("Ravenclaw"));
+   
   }
 
   let allFilter = document.querySelector("button#all");
@@ -116,6 +117,11 @@ function init() {
   gryffindorFilter.addEventListener("click", filterGryffindor);
   hufflepuffFilter.addEventListener("click", filterHufflepuff);
   ravenclawFilter.addEventListener("click", filterRavenclaw);
+
+  // Now allowing the sorting of whichever array is currently in use on the page
+
+
+  console.log()
 
 
 
