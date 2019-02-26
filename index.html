@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List 2</title>
     <link rel="stylesheet" href="studentlist.css" type="text/css">
+    <style>
+    #student-block-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      
+    }    
+    </style>
 </head>
 <body>
   <h1>Students 1991</h1>
-    
+  <div id="student-block-grid">
+    <template id="student-block-template">
+      <div id="student-block">
+        <p id="first-name">First Name:<span>ayy</span></p>
+        <p id="second-name">Second Name:<span></span></p>
+        <p id="last-name">Last Name:<span></span></p>
+        <p id="house">House:<span></span></p>
+      </div>
+  </template>
+  </div>
+
   <script src="studentlist.js"></script>
 </body>
 </html>
