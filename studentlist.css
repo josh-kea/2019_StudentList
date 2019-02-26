@@ -2,22 +2,54 @@ body {
     background-color: aliceblue;
 }
 
-.gryffindor {
+#student-block-grid {
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    grid-column-gap:20px;
+    grid-row-gap:20px;
+  }   
+
+  #student-block{
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    height:100%;
+  }
+
+  #student-block:hover{
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.5);
+  }
+
+#house-color{
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    
+    width:100%;
+    display:inline-block;
+}
+#house-color p{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px; 
+    font-size:1.3em;
+}
+
+.Gryffindor {
     background-color: #ce3a0a;
     color: #fdb02e
 }
 
-.hufflepuff {
+.Hufflepuff {
     background-color: #ffc02a;
     color: #0b0000  
 }
 
-.ravenclaw {
+.Ravenclaw {
     background-color: #395f9d;
     color: #e9ba36  
 }
 
-.slytherin {
+.Slytherin {
     background-color: #588c39;
     color: #c0b1c6  
 }

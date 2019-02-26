@@ -23,7 +23,7 @@ function init() {
 
   const Student = {
     firstname: "--First Name--",
-    secondname: "--Second Name--",
+    secondname: "None",
     lastname: "--Last Name--",
     house: "--House--"
   }
@@ -53,23 +53,42 @@ function init() {
 
         arrayOfStudents.push(newStudent);
       })
-      displayStudents();
+      displayStudents(arrayOfStudents);
   }
 
   //Creating function to display students from the Student objects we've just created and stored into arrayOfStudents.
 
-  function displayStudents(){
-    arrayOfStudents.forEach(newStud => {
-      let clone = studentBlock.cloneNode(true);
+  function displayStudents(array){
+      array.forEach(newStud => {
+      const clone = studentBlock.cloneNode(true);
       console.log(newStud)
-
+      
       clone.querySelector("#first-name span").textContent = newStud.firstname;
-      clone.querySelector("#second-name span").textContent = newStud.secondname;;
-      clone.querySelector("#last-name span").textContent = newStud.lastname;;
-      clone.querySelector("#house span").textContent = newStud.house;
-
+      
+      clone.querySelector("#last-name span").textContent = newStud.lastname;
+      clone.querySelector("#house").textContent = newStud.house;
+      clone.querySelector("#house-color").classList.add(`${newStud.house}`);
       studentBlockGrid.appendChild(clone);
-
-
     })
   }
+
+    // We need to create a function that returns an array of only specific students.
+
+  function filterHouse(house){
+    let houseFiltered;
+
+    houseFiltered = arrayOfStudents.filter(ele => ele.house === house);
+    
+    return houseFiltered;
+
+  }
+
+  //Testing -- WORKS!
+  filterHouse("Slytherin");
+  //Now making buttons work to filter by house
+
+
+
+
+
+
