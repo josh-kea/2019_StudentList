@@ -9,7 +9,7 @@ let studentBlock = document.querySelector('#student-block-template').content;
 function init() {
   getJSON();
   // console.log(arrayOfStudents)
-
+  
   // TODO: Load JSON, create clones, build list, add event listeners, show modal, find images, and other stuff ...
 }
 
@@ -64,7 +64,7 @@ function init() {
       studentBlockGrid.innerHTML = "";
       array.forEach(newStud => {
       const clone = studentBlock.cloneNode(true);
-      console.log(newStud)
+      //console.log(newStud)
       
       clone.querySelector("#first-name span").textContent = newStud.firstname;
       
@@ -73,6 +73,7 @@ function init() {
       clone.querySelector("#house-color").classList.add(`${newStud.house}`);
       studentBlockGrid.appendChild(clone);
     })
+    currentArray = array; // Making sure that the displayed array is the current array, to be sorted
   }
 
     // We need to create a function that returns an array of only specific students.
@@ -119,9 +120,19 @@ function init() {
   ravenclawFilter.addEventListener("click", filterRavenclaw);
 
   // Now allowing the sorting of whichever array is currently in use on the page
+  // console.log(currentArray)
 
+  function sortByFirstName(){
+    console.log("hello");
+    let sortedArray;
+    sortedArray = currentArray.sort((a, b) => a.firstname.localeCompare(b.firstname));
+    displayStudents(sortedArray);
+  }
 
-  console.log()
+  //
+  const sortByFirstNameBtn = document.querySelector("button#sort-first-name");
+
+  sortByFirstNameBtn.addEventListener("click", sortByFirstName);
 
 
 
