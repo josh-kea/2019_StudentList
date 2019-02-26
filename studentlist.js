@@ -59,6 +59,7 @@ function init() {
   //Creating function to display students from the Student objects we've just created and stored into arrayOfStudents.
 
   function displayStudents(array){
+      studentBlockGrid.innerHTML = "";
       array.forEach(newStud => {
       const clone = studentBlock.cloneNode(true);
       console.log(newStud)
@@ -75,7 +76,7 @@ function init() {
     // We need to create a function that returns an array of only specific students.
 
   function filterHouse(house){
-    let houseFiltered;
+    let houseFiltered = [];
 
     houseFiltered = arrayOfStudents.filter(ele => ele.house === house);
     
@@ -86,6 +87,37 @@ function init() {
   //Testing -- WORKS!
   filterHouse("Slytherin");
   //Now making buttons work to filter by house
+
+  function displayAll(){
+    displayStudents(arrayOfStudents);
+  }
+
+  function filterSlytherin (){
+    displayStudents(filterHouse("Slytherin"));
+  }
+  function filterGryffindor (){
+    displayStudents(filterHouse("Gryffindor"));
+  }
+  function filterHufflepuff (){
+    displayStudents(filterHouse("Hufflepuff"));
+  }
+  function filterRavenclaw (){
+    displayStudents(filterHouse("Ravenclaw"));
+  }
+
+  let allFilter = document.querySelector("button#all");
+  let slytherinFilter = document.querySelector("button#slytherin");
+  let gryffindorFilter = document.querySelector("button#gryffindor");
+  let hufflepuffFilter = document.querySelector("button#hufflepuff");
+  let ravenclawFilter = document.querySelector("button#ravenclaw");
+
+  allFilter.addEventListener("click", displayAll);
+  slytherinFilter.addEventListener("click", filterSlytherin);
+  gryffindorFilter.addEventListener("click", filterGryffindor);
+  hufflepuffFilter.addEventListener("click", filterHufflepuff);
+  ravenclawFilter.addEventListener("click", filterRavenclaw);
+
+
 
 
 
