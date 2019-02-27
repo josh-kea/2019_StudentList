@@ -126,6 +126,7 @@ button#ravenclaw span{
     
 }
 
-button {
-    style:none;
+
+p#expelled {
+    font-family: 'Open Sans', sans-serif;
 }
