@@ -2,6 +2,7 @@
 
 window.addEventListener("DOMContentLoaded", init);
 
+//Below is for cloning each student block to the main student grid.
 let studentBlockGrid = document.querySelector('#student-block-grid');
 let studentBlockContent = document.querySelector('#student-block-template').content;
 let expelledStudentCounter = document.querySelector('p#expelled span');
@@ -114,12 +115,15 @@ function init() {
         // arrayOfStudents.shift(ele => ele.studentID === newStud.studentID);
         // Pushing the expelled student to the expelled students Array;
         //array.filter(ele => ele.studentID === newStud.studentID);
+        
         for (let i = arrayOfStudents.length - 1; i >= 0; --i) {
           if (arrayOfStudents[i].studentID == newStud.studentID) {
-              arrayOfStudents.splice(i,1);
+              arrayOfStudents.splice(i,1)
+              
               expelledStudents.push(newStud);
               studentCount--;
               expelledStudentCounter.textContent = expelledStudents.length;
+              
               
               //Below I am updating the button counts that we initialized earlier on line 74 to be updated whenever a student is expelled !
               allBtnCount.textContent = arrayOfStudents.length;
@@ -127,20 +131,32 @@ function init() {
               gryffindorBtnCount.textContent = filterHouse("Gryffindor").length;
               hufflepuffBtnCount.textContent = filterHouse("Hufflepuff").length;
               ravenclawBtnCount.textContent = filterHouse("Ravenclaw").length;
+              
+              console.log(array)
+              
+          }
+        } 
+        //Below is for removing array elements from the currently displaying array. So that the house can be filtered and then the house students being shown can also be sorted by names.
+        for (let i = array.length - 1; i >= 0; --i) {
+          if (array[i].studentID == newStud.studentID) {
+              array.splice(i,1)  
+              console.log(array);            
           }
         }
+        
         studentBlock.style.display = "none";
-        
-        console.log(arrayOfStudents)
-        console.log(expelledStudents)
-        
         
       });   
       //Setting the number of students within each category
       
       studentBlockGrid.appendChild(clone);
     })
-    currentArray = array; // Making sure that the displayed array is the current array, to be sorted
+    
+     // Making sure that the displayed array is the current array, to be sorted
+    
+      currentArray = array;
+      console.log(currentArray)
+    
   }
 
     // We need to create a function that returns an array of only specific students.
