@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", init);
 
 let studentBlockGrid = document.querySelector('#student-block-grid');
 let studentBlockContent = document.querySelector('#student-block-template').content;
+let expelledStudentCounter = document.querySelector('p#expelled span');
 
 function init() {
   getJSON();
@@ -29,15 +30,16 @@ function init() {
     studentID: "--id--"
   }
 
-  const arrayOfStudents = [];
+  let arrayOfStudents = [];
   let currentArray = [];
   let expelledStudents = [];
   let studentCount = 0;
-  // House Arrays
-  let arrayOfGryffindor = [];
-  let arrayOfSlytherin = [];
-  let arrayOfHufflepuff = [];
-  let arrayOfRavenclaw = [];
+  let expelledStudentCount = 0;
+
+  // Below is the counting requirement, to show how many students are currently in each house. Shown to the right of the buttons on the webpage.
+  let allBtnCount = 
+  let gryffindorBtnCount =
+  let 
 
   function createStudents(data){
     data.forEach(stud => {
@@ -62,12 +64,15 @@ function init() {
 
         arrayOfStudents.push(newStudent);
       })
+
+      // Displaying all students once the webpage has init()
       displayStudents(arrayOfStudents);
-      arrayOfGryffindor = filterHouse("Gryffindor");
-      arrayOfSlytherin = filterHouse("Slytherin");
-      arrayOfHufflepuff =  filterHouse("Hufflepuff"); 
-      arrayOfRavenclaw =  filterHouse("Ravenclaw");
-       
+      //Initially setting the amount of students within their arrays to be shown on the screen
+      document.querySelector('button#all span').textContent = arrayOfStudents.length;
+      document.querySelector('button#slytherin span').textContent = filterHouse("Slytherin").length;
+      document.querySelector('button#gryffindor span').textContent = filterHouse("Gryffindor").length;
+      document.querySelector('button#hufflepuff span').textContent = filterHouse("Hufflepuff").length;
+      document.querySelector('button#ravenclaw span').textContent = filterHouse("Ravenclaw").length;
   }
 
   //Creating function to display students from the Student objects we've just created and stored into arrayOfStudents.
@@ -92,15 +97,33 @@ function init() {
       expelBtn.dataset.expelid = newStud.studentID;
       expelBtn.addEventListener("click", function(){
         // Removing the student from the current array
-        array.shift(newStud);
+        //array.shift(newStud);
+        // arrayOfStudents.shift(ele => ele.studentID === newStud.studentID);
         // Pushing the expelled student to the expelled students Array;
+        //array.filter(ele => ele.studentID === newStud.studentID);
+        for (let i = arrayOfStudents.length - 1; i >= 0; --i) {
+          if (arrayOfStudents[i].studentID == newStud.studentID) {
+              arrayOfStudents.splice(i,1);
+              expelledStudents.push(newStud);
+              studentCount--;
+              expelledStudentCounter.textContent = expelledStudents.length;
+              
+              document.querySelector('button#all span').textContent = arrayOfStudents.length;
+              document.querySelector('button#slytherin span').textContent = filterHouse("Slytherin").length;
+              document.querySelector('button#gryffindor span').textContent = filterHouse("Gryffindor").length;
+              document.querySelector('button#hufflepuff span').textContent = filterHouse("Hufflepuff").length;
+              document.querySelector('button#ravenclaw span').textContent = filterHouse("Ravenclaw").length;
+          }
+        }
         studentBlock.style.display = "none";
-        expelledStudents.push(newStud);
-        console.log(array)
-        console.log(studentCount)
+        
+        console.log(arrayOfStudents)
+        console.log(expelledStudents)
+        
         
       });   
-
+      //Setting the number of students within each category
+      
       studentBlockGrid.appendChild(clone);
     })
     currentArray = array; // Making sure that the displayed array is the current array, to be sorted
@@ -126,16 +149,16 @@ function init() {
 
   function filterSlytherin (){
     
-    displayStudents(arrayOfSlytherin);
+    displayStudents(filterHouse("Slytherin"));
   }
   function filterGryffindor (){
-    displayStudents(arrayOfGryffindor);
+    displayStudents(filterHouse("Gryffindor"));
   }
   function filterHufflepuff (){
-    displayStudents(arrayOfHufflepuff);
+    displayStudents(filterHouse("Hufflepuff"));
   }
   function filterRavenclaw (){
-    displayStudents(arrayOfRavenclaw);
+    displayStudents(filterHouse("Ravenclaw"));
    
   }
 

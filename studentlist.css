@@ -1,5 +1,15 @@
+@font-face {
+    font-family: "harry";
+    src: url("fonts/harrypotter.ttf");
+}
+
 body {
     background-color: aliceblue;
+    
+}
+
+.harry-font {
+    font-family: harry;
 }
 
 #student-block-grid {
@@ -7,6 +17,8 @@ body {
     grid-template-columns:repeat(5, 1fr);
     grid-column-gap:20px;
     grid-row-gap:20px;
+ 
+    
   }   
 
   #student-block{
@@ -14,6 +26,7 @@ body {
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
     height:100%;
+    background-color:white;
   }
 
   #student-block:hover{
@@ -32,7 +45,7 @@ body {
     text-align: center;
     vertical-align: middle;
     line-height: 20px; 
-    font-size:1.3em;
+    font-size:1.5em;
 }
 
 .Gryffindor {
@@ -53,4 +66,22 @@ body {
 .Slytherin {
     background-color: #588c39;
     color: #c0b1c6  
+}
+
+p#first-name {
+    width:100%;
+    text-align: left;
+    line-height:100px;
+    padding-left:20px;
+    padding-right:20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+p#last-name {
+    line-height:100px;
+    width:100%;
+    text-align: left;
+    padding-left:20px;
+    padding-right:20px;
+    font-family: 'Open Sans', sans-serif;
 }

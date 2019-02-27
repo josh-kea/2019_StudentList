@@ -4,33 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List 2</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="studentlist.css" type="text/css">
+    
     <style>
      
     </style>
 </head>
 <body>
-  <h1>Students 1991</h1>
-  <button id="all">All</button>
-  <button id="slytherin">Slytherin</button>
-  <button id="gryffindor">Gryffindor</button>
-  <button id="hufflepuff">Hufflepuff</button>
-  <button id="ravenclaw">Ravenclaw</button>
+  <h1 class="harry-font">Hogwarts Students 1991</h1>
+  <button id="all">All <span>0</span></button>
+  <button id="slytherin">Slytherin <span>0</span></button>
+  <button id="gryffindor">Gryffindor <span>0</span></button>
+  <button id="hufflepuff">Hufflepuff <span>0</span></button>
+  <button id="ravenclaw">Ravenclaw <span>0</span></button>
   <button id="sort-first-name">Sort By First Name</button>
   <button id="sort-last-name">Sort By Last Name</button>
+  <p id="expelled">Expelled Students:<span>0</span></p>
   
   <div id="student-block-grid">
     <template id="student-block-template">
       <div id="student-block">
-        <div id="house-color"><p id="house">House: <span></span></p></div>
+        <div id="house-color" class="harry-font"><p id="house">House: <span></span></p></div>
         <p id="first-name">First Name: <span></span></p>
         
         <p id="last-name">Last Name: <span></span></p>
+        <button id="expel">EXPELL!</button>
         
       </div>
+      
   </template>
   </div>
+  
 
-  <script src="studentlist.js"></script>
+  <script src="studentlist.1.js"></script>
 </body>
 </html>
