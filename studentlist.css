@@ -12,6 +12,10 @@ body {
     font-family: harry;
 }
 
+h1.harry-font {
+    cursor:pointer;
+}
+
 #student-block-grid {
     display:grid;
     grid-template-columns:repeat(5, 1fr);
@@ -37,7 +41,7 @@ body {
 #house-color{
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
-    
+    font-size:5vmin;
     width:100%;
     display:inline-block;
 }
@@ -70,18 +74,58 @@ body {
 
 p#first-name {
     width:100%;
+    display:inline-block;
     text-align: left;
-    line-height:100px;
+    line-height:50px;
     padding-left:20px;
     padding-right:20px;
     font-family: 'Open Sans', sans-serif;
+    font-size:2.5vmin;
+    
+    font-weight:800;
+}
+
+p#first-name span {
+    font-weight:100;
 }
 
 p#last-name {
-    line-height:100px;
+    display:inline-block;
+    line-height:50px;
     width:100%;
     text-align: left;
     padding-left:20px;
     padding-right:20px;
     font-family: 'Open Sans', sans-serif;
+    font-size:2.5vmin;
+    font-weight:800;
+}
+
+p#last-name span {
+    font-weight:100;
+}
+
+button#expel {
+    width:100%;
+    cursor: pointer;
+    height:50px;
+    font-size:4vmin;
+    display:inline-block;
+}
+
+button#all span,
+button#slytherin span,
+button#hufflepuff span,
+button#gryffindor span,
+button#ravenclaw span{
+    border-left:1px solid;
+    border-right:1px solid;
+    width:100%;
+    padding-left:2px;
+    padding-right:2px;
+    
+}
+
+button {
+    style:none;
 }

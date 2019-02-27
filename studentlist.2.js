@@ -2,6 +2,9 @@
 
 window.addEventListener("DOMContentLoaded", init);
 
+const heading = document.querySelector('h1.harry-font');
+heading.addEventListener("click", () => { location.reload() });
+
 //Below is for cloning each student block to the main student grid.
 let studentBlockGrid = document.querySelector('#student-block-grid');
 let studentBlockContent = document.querySelector('#student-block-template').content;
@@ -105,6 +108,10 @@ function init() {
       clone.querySelector("#house-color").classList.add(`${newStud.house}`);
         //setting dataset id to be equal to studentID from initialized when the object was created
       let studentBlock = clone.querySelector("#student-block");
+      //Showing Modal When studentBlock is clicked.
+      studentBlock.addEventListener('click', () => {
+        modal.showModal();
+      });
       studentBlock.dataset.studentid = newStud.studentID;
       console.log(array)
       let expelBtn = clone.querySelector("button#expel");
@@ -114,6 +121,7 @@ function init() {
         //array.shift(newStud);
         // arrayOfStudents.shift(ele => ele.studentID === newStud.studentID);
         // Pushing the expelled student to the expelled students Array;
+        
         //array.filter(ele => ele.studentID === newStud.studentID);
         
         for (let i = arrayOfStudents.length - 1; i >= 0; --i) {
@@ -231,6 +239,8 @@ function init() {
   } 
 
   */
+
+
 
 
 
