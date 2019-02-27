@@ -122,17 +122,25 @@ function init() {
   // Now allowing the sorting of whichever array is currently in use on the page
   // console.log(currentArray)
 
+  // Sorting by last name, taking the current array
   function sortByFirstName(){
-    console.log("hello");
     let sortedArray;
     sortedArray = currentArray.sort((a, b) => a.firstname.localeCompare(b.firstname));
+    displayStudents(sortedArray);
+  }
+  // Sorting by last name, taking the currenty array
+  function sortByLastName(){
+    let sortedArray;
+    sortedArray = currentArray.sort((a, b) => a.lastname.localeCompare(b.lastname));
     displayStudents(sortedArray);
   }
 
   //
   const sortByFirstNameBtn = document.querySelector("button#sort-first-name");
+  const sortByLastNameBtn = document.querySelector("button#sort-last-name");
 
   sortByFirstNameBtn.addEventListener("click", sortByFirstName);
+  sortByLastNameBtn.addEventListener("click", sortByLastName);
 
 
 
