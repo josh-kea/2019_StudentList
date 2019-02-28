@@ -25,7 +25,7 @@ let ravenclawBtnCount = document.querySelector('button#ravenclaw span');
   sortByLastNameBtn.addEventListener("click", sortByLastName);
 
 function init() {
-  getJSON();
+  getJSON()
   // console.log(arrayOfStudents)
   
   // TODO: Load JSON, create clones, build list, add event listeners, show modal, find images, and other stuff ...
@@ -82,6 +82,9 @@ function init() {
 
       // Displaying all students once the webpage has init(), the first time loading.
       displayStudents(arrayOfStudents);
+
+      //Getting the blood type JSON once the array is filled
+      getJSON2();
       
       //Initially setting the amount of students within their arrays to be shown on the screen
       //NOTE: filterHouse(house) returns an array of only students within that (house)!
@@ -113,7 +116,7 @@ function init() {
         modal.showModal();
       });
       studentBlock.dataset.studentid = newStud.studentID;
-      console.log(array)
+      //console.log(array)
       let expelBtn = clone.querySelector("button#expel");
       expelBtn.dataset.expelid = newStud.studentID;
       expelBtn.addEventListener("click", function(){
@@ -163,7 +166,7 @@ function init() {
      // Making sure that the displayed array is the current array, to be sorted
     
       currentArray = array;
-      console.log(currentArray)
+      //console.log(currentArray)
     
   }
 
@@ -239,6 +242,42 @@ function init() {
   } 
 
   */
+
+  // Code below for adding blood types to student objects
+  function getJSON2() {
+    fetch("http://petlatkea.dk/2019/hogwarts/families.json")
+      .then(e => e.json())
+      .then(updateStudents);
+  }
+
+  function updateStudents(data){
+    //console.log(data.half);
+    data.half.forEach( personLastName => {
+      
+      const obj = arrayOfStudents.find( ele => ele.lastname === personLastName);
+      console.log(obj);
+      if(obj){
+      obj.bloodStatus = "Half";
+      }
+      console.log(obj);  
+    })
+    data.pure.forEach( personLastName => {
+      
+      const obj = arrayOfStudents.find( ele => ele.lastname === personLastName);
+      console.log(obj);
+      if (obj){
+      obj.bloodStatus = "Pure";
+      } 
+      console.log(obj);  
+    })
+
+    arrayOfStudents.forEach(obj => {
+      if (!obj.bloodStatus){
+        obj.bloodStatus = "Muggle";
+        console.log(obj);
+      }
+    })
+  }
 
 
 
