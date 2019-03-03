@@ -16,7 +16,10 @@ let slytherinBtnCount = document.querySelector('button#slytherin span');
 let gryffindorBtnCount = document.querySelector('button#gryffindor span');
 let hufflepuffBtnCount = document.querySelector('button#hufflepuff span');
 let ravenclawBtnCount = document.querySelector('button#ravenclaw span');
+const modal = document.querySelector('dialog#modal');
+const hackBtn = document.querySelector('button#hack')
 
+const closeBtn = document.querySelector('.close-modal-btn');
 //Sorting buttons
   const sortByFirstNameBtn = document.querySelector("button#sort-first-name");
   const sortByLastNameBtn = document.querySelector("button#sort-last-name");
@@ -26,6 +29,8 @@ let ravenclawBtnCount = document.querySelector('button#ravenclaw span');
 
 function init() {
   getJSON()
+
+  
   // console.log(arrayOfStudents)
   
   // TODO: Load JSON, create clones, build list, add event listeners, show modal, find images, and other stuff ...
@@ -96,13 +101,23 @@ function init() {
        gryffindorBtnCount.textContent = filterHouse("Gryffindor").length;
        hufflepuffBtnCount.textContent = filterHouse("Hufflepuff").length;
        ravenclawBtnCount.textContent = filterHouse("Ravenclaw").length;
+
   }
 
   //Creating function to display students from the Student objects we've just created and stored into arrayOfStudents.
 
   function displayStudents(array){
+    
       studentBlockGrid.innerHTML = "";
+      allBtnCount.textContent = arrayOfStudents.length;
+       slytherinBtnCount.textContent = filterHouse("Slytherin").length;
+       gryffindorBtnCount.textContent = filterHouse("Gryffindor").length;
+       hufflepuffBtnCount.textContent = filterHouse("Hufflepuff").length;
+       ravenclawBtnCount.textContent = filterHouse("Ravenclaw").length;
       inquisitorialSquadCounter.textContent = inquisitorialArray.length;
+
+
+      // Students being displayed from array parameter below
       array.forEach(newStud => {
       const clone = studentBlockContent.cloneNode(true);
       //console.log(newStud)
@@ -112,13 +127,43 @@ function init() {
       clone.querySelector("#last-name span").textContent = newStud.lastname;
       clone.querySelector("#house").textContent = newStud.house;
       clone.querySelector("#house-color").classList.add(`${newStud.house}`);
-        //setting dataset id to be equal to studentID from initialized when the object was created
-      let studentBlock = clone.querySelector("#student-block");
+      
+      const moreInfo = clone.querySelector("button#more-info");
+      //Setting the conent of the specific modals below
+        
       //Showing Modal When studentBlock is clicked.
-      studentBlock.addEventListener('click', () => {
-        console.log("clicked");
+      moreInfo.addEventListener('click', () => {
+        let lowerCaseLastName = newStud.lastname.toLowerCase();
+        let lowerCaseFirstNameLetter = newStud.firstname.charAt(0).toLowerCase();
+          
+          document.querySelector("dialog#modal").classList.add(`${newStud.house}`);
+        if(`images/${lowerCaseLastName}_${lowerCaseFirstNameLetter}.png`){
+          document.querySelector("#modal img").src = `images/${lowerCaseLastName}_${lowerCaseFirstNameLetter}.png`;
+          
+          console.log(`images/${lowerCaseLastName}_${lowerCaseFirstNameLetter}.png`);
+        } else {
+          document.querySelector("#modal img").src="";
+        }
+         
+        document.querySelector("h2#modalName span#firstname").textContent = newStud.firstname;
+        document.querySelector("h2#modalName span#lastname").textContent = newStud.lastname;
+        document.querySelector("h3#modalHouse").textContent = newStud.house;
+        document.querySelector("h3#modalHouse").classList.add(`${newStud.house}`);
+        document.querySelector("p#modalBloodStatus span#bloodStatus").textContent = newStud.bloodStatus;
+        if (newStud.inquisitorialStatus){
+        document.querySelector("p#inquisitorSquadStatus").textContent = "Inquisitorial Squad Member";
+        } else {
+          document.querySelector("p#inquisitorSquadStatus").textContent = "Non Inquisitorial Squad Member";
+        }
+        modal.showModal();
       });
-      studentBlock.dataset.studentid = newStud.studentID;
+      closeBtn.addEventListener('click', () => {
+        document.querySelector("dialog#modal").classList.remove(`${newStud.house}`);
+        document.querySelector("h3#modalHouse").classList.remove(`${newStud.house}`);
+        console.log("should be removed")
+        modal.close();
+      });
+      
       //console.log(array)
 
       // INQ BUTTON BELOW
@@ -179,7 +224,8 @@ function init() {
         //array.filter(ele => ele.studentID === newStud.studentID);
         
         for (let i = arrayOfStudents.length - 1; i >= 0; --i) {
-          if (arrayOfStudents[i].studentID == newStud.studentID) {
+          if (arrayOfStudents[i].studentID === newStud.studentID) {
+              
               arrayOfStudents.splice(i,1)
               
               expelledStudents.push(newStud);
@@ -328,6 +374,55 @@ function init() {
         // console.log(obj);
       }
     })
+  }
+
+  hackBtn.addEventListener("click", hack);
+
+  function hack(){
+    let me = Object.create(Student);
+    me.firstname = "Joshua";
+    me.lastname = "Kaplan";
+    me.house = "Ravenclaw";
+    me.bloodStatus = "Pure";
+    arrayOfStudents.push(me);
+    window.alert("JOSHUA HAS ENTERED HOGWARTS AND HAS CAST A SPELL UPON YOU ALL")
+    me.studentID = "nonono";
+    arrayOfStudents.forEach( person => {
+      
+      const half = arrayOfStudents.find( ele => ele.bloodStatus === "Half");
+      const muggle = arrayOfStudents.find( ele => ele.bloodStatus === "Muggle");
+      const pure = arrayOfStudents.find( ele => ele.bloodStatus === "Pure");
+      // console.log(obj);
+      if(half){
+      half.bloodStatus = "Pure";
+      }
+      if (muggle){
+        muggle.bloodStatus = "Pure";
+      }
+      let randomNum = Math.floor(Math.random() * 2) + 1 
+      if (pure && randomNum === 1){
+        pure.bloodStatus = "Muggle";
+      } else {
+        pure.bloodStatus = "Half";
+      }
+
+      let inquisitorial = arrayOfStudents.find( ele => ele.inquisitorialStatus === true);
+
+      if(inquisitorial){
+        setTimeout(() =>{
+          inquisitorial.inquisitorialStatus = false;
+          
+          inquisitorialSquadCounter.textContent = inquisitorialArray.length;
+          displayStudents(arrayOfStudents);
+        },300)
+      }
+
+      displayStudents(arrayOfStudents);
+      
+      // console.log(obj);  
+    })
+    
+    console.log(me);
   }
 
 

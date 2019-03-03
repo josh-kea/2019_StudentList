@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="studentlist.css" type="text/css">
     
+    
     <style>
      
     </style>
@@ -20,6 +21,7 @@
   <button id="ravenclaw" class="Ravenclaw">Ravenclaw <span>0</span></button>
   <button id="sort-first-name">Sort By First Name</button>
   <button id="sort-last-name">Sort By Last Name</button>
+  <button id="hack">What does this button do?</button>
   <p id="expelled">Expelled Students:<span>0</span></p>
   <p id="inquisitorial">Inquisitorial Squad:<span>0</span></p>
   
@@ -29,17 +31,29 @@
         <div id="house-color" class="harry-font"><p id="house">House: <span></span></p></div>
         <p id="first-name">First Name: <span></span></p>
         <p id="last-name">Last Name: <span></span></p>
-        <button id="expel" class="harry-font">EXPEL</button>
-        <button id="inquisitorial" class="harry-font">Add to Inquistitorial Squad</button>
-        
+        <button id="more-info">More Info</button>
+        <button id="expel">EXPEL</button>
+        <button id="inquisitorial">Add to Inquistitorial Squad</button> 
       </div>
+
+      
 
       
       
   </template>
   </div>
+  <dialog id="modal" data-keyboard="false">
+    <img src="" alt="Mysterious">
+    <h2 id="modalName"><span id="firstname"></span> <span id="lastname"></span></h2>
+    <h3 id="modalHouse" class="harry-font"></h3>
+    <p id="modalBloodStatus"><span id="bloodStatus"></span> blood type</p>
+    <p id="inquisitorSquadStatus"></p>
+    <div class="actions">
+      <button class="small close-modal-btn">Close</button>
+    </div>
+
+</dialog>
   
-  <script src="modal.js"></script>
   <script src="studentlist.2.js"></script>
 </body>
 </html>

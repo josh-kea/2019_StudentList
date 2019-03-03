@@ -105,12 +105,14 @@ p#last-name span {
     font-weight:100;
 }
 
-button#expel {
+button#expel,
+button#more-info {
     width:100%;
     cursor: pointer;
-    height:50px;
-    font-size:4vmin;
+    height:25px;
+    font-size:2vmin;
     display:inline-block;
+    font-family: 'Open Sans', sans-serif;
 }
 
 button#inquisitorial {
@@ -119,6 +121,7 @@ button#inquisitorial {
     height:25px;
     font-size:2vmin;
     display:inline-block;
+    font-family: 'Open Sans', sans-serif;
 }
 
 button#all span,
@@ -139,3 +142,45 @@ p#expelled,
 p#inquisitorial {
     font-family: 'Open Sans', sans-serif;
 }
+
+/* MODAL STYLING */
+dialog#modal {
+    
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    text-align: center;
+    border: none;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.25);
+    max-width: 90vw;
+  }
+  
+  dialog#modal[open] {
+    animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
+  }
+  
+  dialog#modal::backdrop {
+    background: linear-gradient(45deg, rgba(70, 60, 42, 0.5), rgba(202, 134, 122, 0.5));
+  }
+  
+  dialog#modal .actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateX(-3rem);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  h3#modalHouse {
+      font-size:2em;
+  }
