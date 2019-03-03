@@ -9,7 +9,7 @@ heading.addEventListener("click", () => { location.reload() });
 let studentBlockGrid = document.querySelector('#student-block-grid');
 let studentBlockContent = document.querySelector('#student-block-template').content;
 let expelledStudentCounter = document.querySelector('p#expelled span');
-
+let inquisitorialSquadCounter = document.querySelector('p#inquisitorial span');
 // Below is the counting requirement, to show how many students are currently in each house. Shown to the right of the buttons on the webpage.
 let allBtnCount = document.querySelector('button#all span');
 let slytherinBtnCount = document.querySelector('button#slytherin span');
@@ -102,7 +102,7 @@ function init() {
 
   function displayStudents(array){
       studentBlockGrid.innerHTML = "";
-      
+      inquisitorialSquadCounter.textContent = inquisitorialArray.length;
       array.forEach(newStud => {
       const clone = studentBlockContent.cloneNode(true);
       //console.log(newStud)
@@ -137,39 +137,40 @@ function init() {
          
           if (newStud.bloodStatus === "Pure"){
             inquisitorialArray.push(newStud);
+            newStud.inquisitorialStatus = true;
             console.log(inquisitorialArray);  
+            
             displayStudents(array);
             
           }else if (newStud.bloodStatus === "Half" && newStud.house === "Slytherin") {
             inquisitorialArray.push(newStud);
-            console.log(inquisitorialArray);  
+            newStud.inquisitorialStatus = true;
+            console.log(inquisitorialArray); 
+             
             displayStudents(array);
           } else {
             window.alert("Cannot be added to inquisitorial squad because this students bloodtype is " + newStud.bloodStatus)
+            newStud.inquisitorialStatus = false;
           }
         } else {
           for (let i = inquisitorialArray.length - 1; i >= 0; --i) {
             if (inquisitorialArray[i].studentID == newStud.studentID) {
                 inquisitorialArray.splice(i,1)
                 console.log(inquisitorialArray)
+                
+                
                 displayStudents(array);
             }
            }
       }
     }
-
-      //
-
-
-
-      //
       //
       //
       //
       // EXPELL BUTTON BELOW
       let expelBtn = clone.querySelector("button#expel");
       expelBtn.dataset.expelid = newStud.studentID;
-      expelBtn.addEventListener("click", function(){
+      expelBtn.addEventListener("click", () => {
         // Removing the student from the current array
         //array.shift(newStud);
         // arrayOfStudents.shift(ele => ele.studentID === newStud.studentID);
@@ -182,7 +183,7 @@ function init() {
               arrayOfStudents.splice(i,1)
               
               expelledStudents.push(newStud);
-              studentCount--;
+              
               expelledStudentCounter.textContent = expelledStudents.length;
               
               
@@ -194,6 +195,8 @@ function init() {
               ravenclawBtnCount.textContent = filterHouse("Ravenclaw").length;
               
               console.log(array)
+              displayStudents(array);
+              
               
           }
         } 
@@ -204,9 +207,17 @@ function init() {
               console.log(array);            
           }
         }
+
+        for (let i = inquisitorialArray.length - 1; i >= 0; --i) {
+          if (inquisitorialArray[i].studentID == newStud.studentID) {
+              inquisitorialArray.splice(i,1)
+              console.log(inquisitorialArray)
+              displayStudents(array);
+          }
+         }
+        
         
         displayStudents(array);
-        
       }); 
       
       

@@ -135,6 +135,7 @@ button#ravenclaw span{
 }
 
 
-p#expelled {
+p#expelled,
+p#inquisitorial {
     font-family: 'Open Sans', sans-serif;
 }
