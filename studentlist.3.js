@@ -54,9 +54,6 @@ function init() {
   let studentCount = 0;
   let expelledStudentCount = 0;
 
-  //Inquistitorial Squad array
-  let inquisitorialArray = [];
-
 
 
   function createStudents(data){
@@ -116,57 +113,10 @@ function init() {
       let studentBlock = clone.querySelector("#student-block");
       //Showing Modal When studentBlock is clicked.
       studentBlock.addEventListener('click', () => {
-        console.log("clicked");
+        
       });
       studentBlock.dataset.studentid = newStud.studentID;
       //console.log(array)
-
-      // INQ BUTTON BELOW
-
-      let inquisitorialBtn = clone.querySelector("button#inquisitorial");
-        inquisitorialBtn.addEventListener("click", checkInquisitorialArray)
-        //Setting text content of button if this student is already in the array
-        if (inquisitorialArray.find( ele => ele.studentID === newStud.studentID)) {
-          inquisitorialBtn.textContent = "Remove From Inquisitorial Squad";
-        } else {
-          inquisitorialBtn.textContent = "Add To Inquisitorial Squad";
-        }
-
-      function checkInquisitorialArray() {
-        if (!inquisitorialArray.find( ele => ele.studentID === newStud.studentID)) {
-         
-          if (newStud.bloodStatus === "Pure"){
-            inquisitorialArray.push(newStud);
-            console.log(inquisitorialArray);  
-            displayStudents(array);
-            
-          }else if (newStud.bloodStatus === "Half" && newStud.house === "Slytherin") {
-            inquisitorialArray.push(newStud);
-            console.log(inquisitorialArray);  
-            displayStudents(array);
-          } else {
-            window.alert("Cannot be added to inquisitorial squad because this students bloodtype is " + newStud.bloodStatus)
-          }
-        } else {
-          for (let i = inquisitorialArray.length - 1; i >= 0; --i) {
-            if (inquisitorialArray[i].studentID == newStud.studentID) {
-                inquisitorialArray.splice(i,1)
-                console.log(inquisitorialArray)
-                displayStudents(array);
-            }
-           }
-      }
-    }
-
-      //
-
-
-
-      //
-      //
-      //
-      //
-      // EXPELL BUTTON BELOW
       let expelBtn = clone.querySelector("button#expel");
       expelBtn.dataset.expelid = newStud.studentID;
       expelBtn.addEventListener("click", function(){
@@ -207,9 +157,7 @@ function init() {
         
         displayStudents(array);
         
-      }); 
-      
-      
+      });   
       //Setting the number of students within each category
       
       studentBlockGrid.appendChild(clone);
@@ -283,6 +231,18 @@ function init() {
     displayStudents(sortedArray);
   }
 
+
+  // Function to remove blocks with specific dataset id's
+  // $('[data-id="26"]').remove();
+
+  /* function expelStudent(){
+    if (this.dataset.expelid === this.dataset.studentid){
+      document.querySelector("[data-studentid='1']").remove();
+    }
+  } 
+
+  */
+
   // Code below for adding blood types to student objects
   function getJSON2() {
     fetch("http://petlatkea.dk/2019/hogwarts/families.json")
@@ -295,26 +255,26 @@ function init() {
     data.half.forEach( personLastName => {
       
       const obj = arrayOfStudents.find( ele => ele.lastname === personLastName);
-      // console.log(obj);
+      console.log(obj);
       if(obj){
       obj.bloodStatus = "Half";
       }
-      // console.log(obj);  
+      console.log(obj);  
     })
     data.pure.forEach( personLastName => {
       
       const obj = arrayOfStudents.find( ele => ele.lastname === personLastName);
-      // console.log(obj);
+      console.log(obj);
       if (obj){
       obj.bloodStatus = "Pure";
       } 
-      // console.log(obj);   
+      console.log(obj);   
     })
 
     arrayOfStudents.forEach(obj => {
       if (!obj.bloodStatus){
         obj.bloodStatus = "Muggle";
-        // console.log(obj);
+        console.log(obj);
       }
     })
   }

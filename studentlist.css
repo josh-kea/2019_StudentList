@@ -113,6 +113,14 @@ button#expel {
     display:inline-block;
 }
 
+button#inquisitorial {
+    width:100%;
+    cursor: pointer;
+    height:25px;
+    font-size:2vmin;
+    display:inline-block;
+}
+
 button#all span,
 button#slytherin span,
 button#hufflepuff span,
